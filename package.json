@@ -1,0 +1,27 @@
+{
+  "name": "synthomps-tracker-app-backend",
+  "version": "1.0.0",
+  "description": "App para realizar seguimientos de sistomas y actividades deportivas\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D fisicos y actividades deportivas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "Nodejs",
+    "Express"
+  ],
+  "author": "Kevin Quesada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinQE21/SYNTHOMPS-TRACKER-APP-BACK/issues"
+  },
+  "homepage": "https://github.com/KevinQE21/SYNTHOMPS-TRACKER-APP-BACK#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "helmet": "^5.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15"
+  }
+}
