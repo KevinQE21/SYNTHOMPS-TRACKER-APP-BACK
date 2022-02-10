@@ -5,10 +5,10 @@ const { UsersValidator } = require('../validators');
 const validators = require('celebrate');
 
 // Register - POST
-router.post('/register', UsersValidator.createUser, AuthController.register);
+router.post('/register', UsersValidator, AuthController.register);
 
 // Login - POST
-router.post('/login', AuthController.login);
+router.post('/login', UsersValidator, AuthController.login);
 
 //Manejador de error de validators
 router.use(validators.errors());

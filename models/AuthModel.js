@@ -15,4 +15,5 @@ const verifyUser = (user) => {
         .catch(err => console.error(err.stack))
 };
 
+
 module.exports = {createUser, verifyUser};
