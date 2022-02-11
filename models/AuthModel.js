@@ -1,19 +1,26 @@
 const db = require('../db');
 
-const createUser = (user, password, isDoctor) => {
+const createUser = (email, password, isDoctor, hasRegisterInfo) => {
 
     return db
-        .query(`INSERT INTO Users(name, password, isDoctor) VALUES($1, $2, $3) RETURNING *`, [user, password, isDoctor])
+        .query(`INSERT INTO users_auth VALUES ($1, $2, $3, $4) RETURNING *`, [email, password, isDoctor, hasRegisterInfo])
         .then(result => result.rows)
         .catch(err => console.error(err.stack));
 };
 
-const verifyUser = (user) => {
+const verifyUser = (email) => {
     return db
-        .query(`SELECT CASE WHEN EXISTS ( SELECT name FROM Users WHERE name = $1 ) THEN True ELSE False END`, [user])
+        .query(`SELECT CASE WHEN EXISTS ( SELECT email FROM users_auth WHERE email = $1 ) THEN True ELSE False END`, [email])
         .then(result => result.rows[0].case)
         .catch(err => console.error(err.stack))
 };
 
+const getUserByEmail = (email) => {
+    return db
+        .query(`SELECT * FROM users_auth WHERE email = $1`, [email])
+        .then(result => result.rows[0])
+        .catch(err => console.error(err.stack))
+}
 
-module.exports = {createUser, verifyUser};
+
+module.exports = {createUser, verifyUser, getUserByEmail};
