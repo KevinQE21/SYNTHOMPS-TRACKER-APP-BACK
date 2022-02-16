@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "migrate": "node-pg-migrate up --envPath"
+    "migrate:latest": "node-pg-migrate up --envPath",
+    "migrate:new": "node-pg-migrate create"
   },
   "keywords": [
     "Nodejs",
