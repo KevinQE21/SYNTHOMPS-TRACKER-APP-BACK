@@ -1,4 +1,4 @@
-const UsersValidator = require('./UserValidator');
-const RegisterValidator = require('./RegisterValidator');
+const AuthValidator = require('./AuthValidator');
+const UsersValidator = require('./UsersValidator');
 
-module.exports = { UsersValidator, RegisterValidator };
+module.exports = { AuthValidator, UsersValidator };

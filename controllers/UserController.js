@@ -1,14 +1,14 @@
 const { UserModel, AuthModel } = require('../models');
 
-const register = async (req, res) => {
-    const { email, name, lastName, bloodType, birthday, weight } = req.body;
+const registerUserInfo = async (req, res) => {
+    const { email, name, lastName, bloodType, birthday, weight, height } = req.body;
 
-    if(!email || !name || !lastName || !bloodType || !birthday || !weight){
+    if(!email || !name || !lastName || !bloodType || !birthday || !weight || !height){
         return res.status(400).send({ message: 'Favor ingresar los datos correspondientes'});
     }
 
     try {
-        const userInfoExist = await UserModel.verifyRegister(email);
+        const userInfoExist = await UserModel.verifyUserInfoRegister(email);
 
         if(userInfoExist){
             return res
@@ -17,27 +17,28 @@ const register = async (req, res) => {
         }
 
         const newUserRegister = await UserModel
-            .createRegister(
+            .createUserInfoRegister(
                 email,
                 name,
                 lastName,
-                bloodType,
+                bloodType.toUpperCase(),
                 birthday,
+                height,
                 weight
             );
         
         //Actualiza el hasInfoRegister
         AuthModel.updateUserAuth(email);
 
-        return res.status(200).send({message: 'Registro Ingresado', userInfo: newUserRegister});
+        return res.status(200).send({ userInfo: newUserRegister });
     } catch (err) {
         return res  
             .status(400)
-            .send({message: 'Error registrando informacion del usuario', error: err.message})
+            .send({message: 'Error registrando informacion del usuario', error: err.message});
     }
 };
 
-const updateRegister = async (req, res) => {
+const updateUserInfo = async (req, res) => {
     const { email, weight } = req.body;
 
     if(!email || !weight){
@@ -46,17 +47,38 @@ const updateRegister = async (req, res) => {
 
     try {
         const updateRegister = await UserModel
-            .updateRegister(
+            .updateUserInfoRegister(
                 email,
                 weight
             );        
 
-        return res.status(200).send({message: 'Registro Actualizado', userInfo: updateRegister});
+        return res.status(200).send({ userInfo: updateRegister });
     } catch (err) {
         return res  
             .status(400)
-            .send({message: 'Error actualizando la informacion del usuario', error: err.message})
+            .send({message: 'Error actualizando la informacion del usuario', error: err.message});
     }
 }
 
-module.exports = { register, updateRegister };
+const getUserInfo = async (req, res) => {
+    const { email } = req.body;
+
+    if(!email){
+        return res.status(400).send({ message: 'Favor ingresar un correo valido'});
+    }
+
+    try {
+        const user = await UserModel
+            .getUserInfoByEmail(
+                email,
+            );        
+
+        return res.status(200).send({ userInfo: user });
+    } catch (err) {
+        return res  
+            .status(400)
+            .send({message: 'Error al buscar la informacion del usuario', error: err.message});
+    }
+}
+
+module.exports = { registerUserInfo, updateUserInfo, getUserInfo };
