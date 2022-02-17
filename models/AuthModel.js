@@ -20,7 +20,13 @@ const getUserByEmail = (email) => {
         .query(`SELECT * FROM users_auth WHERE email = $1`, [email])
         .then(result => result.rows[0])
         .catch(err => console.error(err.stack))
-}
+};
 
+const updateUserAuth = (email) => {
+    return db
+        .query(`UPDATE users_auth SET "hasInfoRegistered"=True WHERE email = $1`, [email])
+        .then(result => result.rows[0])
+        .catch(err => console.error(err.stack))
+};
 
-module.exports = {createUser, verifyUser, getUserByEmail};
+module.exports = {createUser, verifyUser, getUserByEmail, updateUserAuth};

@@ -1,6 +1,6 @@
 const { celebrate, Joi, Segments } = require('celebrate');
 
-const UserValidator = celebrate({
+const AuthValidator = celebrate({
     [Segments.BODY]: Joi.object().keys({
         email: Joi.string()
             .email()
@@ -13,4 +13,4 @@ const UserValidator = celebrate({
     })
 });
 
-module.exports = UserValidator;
+module.exports = AuthValidator;
