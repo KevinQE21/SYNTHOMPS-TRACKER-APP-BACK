@@ -4,7 +4,7 @@ const createUser = (email, password, isDoctor, hasRegisterInfo) => {
 
     return db
         .query(`INSERT INTO users_auth VALUES ($1, $2, $3, $4) RETURNING *`, [email, password, isDoctor, hasRegisterInfo])
-        .then(result => result.rows)
+        .then(result => result.rows[0])
         .catch(err => console.error(err.stack));
 };
 

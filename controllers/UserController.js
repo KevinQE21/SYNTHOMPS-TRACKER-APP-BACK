@@ -63,6 +63,8 @@ const updateUserInfo = async (req, res) => {
 const getUserInfo = async (req, res) => {
     const { email } = req.body;
 
+    console.log(email);
+
     if(!email){
         return res.status(400).send({ message: 'Favor ingresar un correo valido'});
     }

@@ -81,4 +81,34 @@ const login = async (req, res) => {
 
 };
 
-module.exports = { register, login };
+const getUserAuth = async (req, res) => {
+
+    console.log(req.body)
+
+    const {email} = req.body;
+
+    if(!email){
+        return res.status(400).send({ message: 'Favor ingresar un correo valido'});
+    }
+
+    try {
+        const userIsVerify = await AuthModel.verifyUser(email);
+
+        if(!userIsVerify){
+            return res
+                .status(400)
+                .send({message: 'No existe un usuario con ese correo'});
+        }
+
+        const user = await AuthModel.getUserByEmail(email);
+
+        return res.status(200).send({ user });
+
+    } catch (err) {
+        return res  
+            .status(400)
+            .send({message: 'Error al hacer login', error: err.message})
+    }
+}
+
+module.exports = { register, login, getUserAuth };
