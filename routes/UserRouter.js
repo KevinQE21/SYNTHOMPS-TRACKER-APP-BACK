@@ -12,7 +12,7 @@ router.post('/register', verifyToken, UsersValidator, UserController.registerUse
 router.patch('/register', verifyToken, UserController.updateUserInfo);
 
 // Register - GET
-router.get('/register', verifyToken, UserController.getUserInfo);
+router.post('/getRegister', verifyToken, UserController.getUserInfo);
 
 //Manejador de error de validators
 router.use(validators.errors());

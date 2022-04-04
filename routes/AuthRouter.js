@@ -11,7 +11,7 @@ router.post('/register', AuthValidator, AuthController.register);
 // Login - POST
 router.post('/login', AuthValidator, AuthController.login);
 
-// User Auth - GET
+// User Auth - POST
 router.post('/user', verifyToken, AuthController.getUserAuth);
 
 //Manejador de error de validators
