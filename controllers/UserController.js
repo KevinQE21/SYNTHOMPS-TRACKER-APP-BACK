@@ -61,7 +61,7 @@ const updateUserInfo = async (req, res) => {
 }
 
 const getUserInfo = async (req, res) => {
-    const { email } = req.body;
+    const { email } = req.query;
 
     console.log(email);
 

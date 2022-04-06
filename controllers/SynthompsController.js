@@ -1,7 +1,4 @@
 const { SynthompsModel } = require('../models');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const SECRET = process.env.SECRET;
 
 const getSynthomps = async (req, res) => {
     try {
@@ -20,13 +17,13 @@ const registerUserSynhtomps = (req, res) => {
     
     try {
         synthomps.forEach(async synthomp => {
-            const {name, email, image } = synthomp;
+            const {name, email  } = synthomp;
             
-            if( !email || !name || !image ){
+            if( !email || !name ){
                 return res.status(400).send({ message: 'Favor ingresar la informacion correspondiente'});
             }
 
-            const registeredUserSynthomp = await SynthompsModel.registerUserSynthomp(email, name, image);   
+            const registeredUserSynthomp = await SynthompsModel.registerUserSynthomp(email, name);   
         });
         
         return res.status(200).send({ message: "Sintomas agregados" });
@@ -40,14 +37,14 @@ const registerUserSynhtomps = (req, res) => {
 };
 
 const registerUserNewSynhtomp = async (req, res) => {
-    const { email, name, image } = req.body;
+    const { email, name } = req.body;
 
-    if( !email || !name || !image ){
+    if( !email || !name ){
         return res.status(400).send({ message: 'Favor ingresar la informacion correspondiente'});
     }
 
     try {
-        const registeredUserSynthomp = await SynthompsModel.registerUserSynthomp(email, name, image);        
+        const registeredUserSynthomp = await SynthompsModel.registerUserSynthomp( email, name );        
 
         return res.status(200).send({ userSynthomps: registeredUserSynthomp });
     } catch (err) {
@@ -58,7 +55,7 @@ const registerUserNewSynhtomp = async (req, res) => {
 };
 
 const getUserSynthomps = async (req, res) => {
-    const { email } = req.body;
+    const { email } = req.query;
 
     if( !email ){
         return res.status(400).send({ message: 'Favor ingresar un correo valido'});
@@ -76,7 +73,7 @@ const getUserSynthomps = async (req, res) => {
 };
 
 const deleteUserSynthomps = async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.query;
 
     if( !id ){
         return res.status(400).send({ message: 'Favor ingresar un id valido'});

@@ -8,7 +8,6 @@ const SynthompValidator = celebrate({
         name: Joi.string()
             .required(),
         image: Joi.string()
-            .required(),       
     })
 });
 

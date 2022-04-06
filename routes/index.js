@@ -2,15 +2,18 @@
 const express = require('express');
 const router = express.Router();
 const AuthRouter = require('./AuthRouter');
-const UserRoute = require('./UserRouter');
-const SynthompsRoute = require('./SynthompsRouter');
+const UserRouter = require('./UserRouter');
+const SynthompsRouter = require('./SynthompsRouter');
+const SynthompsTrackRouter = require('./SynthompsTrackRouter');
 const validators = require('celebrate');
 
 router.use('/auth', AuthRouter);
 
-router.use('/user', UserRoute);
+router.use('/user', UserRouter);
 
-router.use('/synthomps', SynthompsRoute);
+router.use('/synthomps', SynthompsRouter);
+
+router.use('/track', SynthompsTrackRouter);
 
 router.use(validators.errors());
 

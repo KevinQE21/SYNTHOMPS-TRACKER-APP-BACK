@@ -16,24 +16,24 @@ exports.up = pgm => {
         bloodtype: { type: 'text', notNull: true},
         weight: { type: 'text', notNull: true },
         height: { type: 'text', notNull: true },
-        birthday: { type: 'date', notNull: true}
+        birthday: { type: 'date', notNull: true} 
     });
     pgm.createTable('synthomps', {
         id: { type: 'serial', primaryKey: true, notNull: true},
         name: { type: 'text', notNull: true},
+        description: { type: 'text', notNull: true},
         image: {type: 'text'}
     });
     pgm.createTable('userinfo_synthomps', {
         id: { type: 'serial', primaryKey: true, notNull: true},
         name: { type: 'text', notNull: true},
-        image: {type: 'text'},
         userinfoid: { type: 'text', notNull: true, references: 'users_info'},
     });
     pgm.createTable('userinfo_synthomps_track', {
         id: { type: 'serial', primaryKey: true, notNull: true },
         intensity: { type: 'text', notNull: true},
         comments: { type: 'text', notNull: false},
-        intensity: { type: 'text', notNull: false},
+        date: { type: 'date', notNull: true},
         userinfoid: { type: 'text', notNull: true, references: 'users_info'},
         synid: { type: 'serial', notNull: true, references: 'userinfo_synthomps'},
     });    

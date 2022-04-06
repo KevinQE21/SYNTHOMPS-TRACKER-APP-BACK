@@ -16,7 +16,7 @@ const getUserSynthompsList = ( email ) => {
 
 const registerUserSynthomp = ( email, name, image ) => {
     return db
-        .query(`INSERT INTO userinfo_synthomps VALUES (DEFAULT, $1, $2, $3) RETURNING *`, [ name, image, email ])
+        .query(`INSERT INTO userinfo_synthomps VALUES (DEFAULT, $1, $2 ) RETURNING *`, [ name, email ])
         .then(result => result.rows)
         .catch(err => console.error(err.stack));
 };

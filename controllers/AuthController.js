@@ -82,10 +82,9 @@ const login = async (req, res) => {
 };
 
 const getUserAuth = async (req, res) => {
+    const {email} = req.query;
 
-    console.log(req.body)
-
-    const {email} = req.body;
+    console.log(req.params)
 
     if(!email){
         return res.status(400).send({ message: 'Favor ingresar un correo valido'});
